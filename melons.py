@@ -4,13 +4,24 @@ from random import randint
 from datetime import datetime
 #access day of the week 
 
+class TooManyMelonsError(ValueError):
+    """Error to raise when too many melons are ordered. """
+    
+    def __init__(self):
+        """Initialize TooManyMelonsError using init method from ValueError."""
 
+        super().__init__('ERROR: Too many melons!')
+
+ 
 class AbstractMelonOrder:
     """A melon order."""
-    
 
     def __init__(self, species, qty, order_type, tax): 
         """Initialize melon order attributes."""
+
+        #error for too many melons 
+        if qty > 100:
+            raise TooManyMelonsError
 
         self.species = species
         self.qty = qty
@@ -99,5 +110,7 @@ class GovernmentMelonOrder(AbstractMelonOrder):
     
         self.passed_inspection = passed 
 
-class TooManyMelonsError(ValueError):
-    super().__init__()
+
+
+
+
